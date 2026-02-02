@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cut Too Soon</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- TOP HUD (simple like CineMatch) -->
+  <header class="top">
+    <div class="brand">
+      <div class="brand-title">CUT TOO SOON</div>
+      <div class="brand-sub">blink & you lose</div>
+    </div>
+
+    <div class="hud">
+      <div class="hud-pill">LIVES <span id="lives">●●●</span></div>
+      <div class="hud-pill">STREAK <span id="streak">0</span></div>
+      <div class="hud-pill">BEST <span id="best">0</span></div>
+
+      <button class="hud-btn" id="btnHow" type="button" aria-haspopup="dialog" aria-controls="howModal">?</button>
+      <button class="hud-btn" id="btnSettings" type="button" aria-haspopup="dialog" aria-controls="settingsModal">⚙</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- SMALL FILTER ROW (optional, simple) -->
+    <section class="filters">
+      <div class="filter-group">
+        <button class="chip is-on" id="filterAll" type="button">All</button>
+        <button class="chip" id="filterMovies" type="button">Movies</button>
+        <button class="chip" id="filterShows" type="button">Shows</button>
+      </div>
+
+      <div class="filter-group" id="regionChips">
+        <button class="chip is-on" type="button" data-region="ALL">ALL</button>
+        <button class="chip" type="button" data-region="US">US</button>
+        <button class="chip" type="button" data-region="DE">DE</button>
+        <button class="chip" type="button" data-region="FR">FR</button>
+      </div>
+
+      <div class="meta">
+        <span id="poolCount">0</span> items
+      </div>
+    </section>
+
+    <!-- CENTER GAME -->
+    <section class="game">
+      <div class="game-top">
+        <div class="pill">ROUND <span id="round">1</span></div>
+        <div class="pill danger" id="spikeTag" hidden>SPIKE</div>
+        <div class="pill">FLASH <span id="flashMs">— ms</span></div>
+      </div>
+
+      <!-- IMAGE AREA -->
+      <div class="frame" id="frame">
+        <div class="overlay" id="frameOverlay">
+          <div class="overlay-title">READY?</div>
+          <div class="overlay-sub">Hit Space or click Start.</div>
+        </div>
+
+        <button class="start" id="btnStart" type="button">Start</button>
+      </div>
+
+      <!-- GUESS AREA (below like CineMatch) -->
+      <div class="guess">
+        <input
+          id="answer"
+          class="input"
+          type="text"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          placeholder="Type the movie or show title…"
+          disabled
+        />
+        <button class="submit" id="btnSubmit" type="button" disabled>Submit</button>
+
+        <div class="under">
+          <button class="link" id="btnSkip" type="button" disabled>Skip</button>
+          <div class="tiny" id="microStatus"></div>
+        </div>
+      </div>
+
+      <!-- FEEDBACK -->
+      <div class="feedback" id="feedback" hidden>
+        <div class="feedback-msg" id="feedbackMsg">—</div>
+        <div class="feedback-meta" id="feedbackMeta">—</div>
+      </div>
+
+      <!-- BOTTOM CONTROLS -->
+      <div class="bottom">
+        <button class="btn" id="btnNext" type="button" disabled>Next</button>
+        <button class="btn" id="btnReveal" type="button" disabled>Reveal</button>
+        <button class="btn" id="btnPause" type="button">Pause</button>
+        <button class="btn ghost" id="btnResetRun" type="button">Reset</button>
+        <button class="btn ghost" id="btnWipeSave" type="button">Wipe</button>
+      </div>
+
+      <!-- hidden stats (JS expects these IDs; we keep them but don’t show UI clutter) -->
+      <div class="hidden">
+        <span id="statCorrect">0</span>
+        <span id="statClose">0</span>
+        <span id="statWrong">0</span>
+        <span id="statSkipped">0</span>
+        <span id="lastTitle">—</span>
+        <span id="lastSub">—</span>
+        <input id="difficulty" type="range" min="1" max="5" value="3" />
+        <span id="difficultyLabel">Savage</span>
+        <input id="spikeRounds" type="checkbox" checked />
+        <button id="lenient" type="button"></button>
+        <button id="strict" type="button"></button>
+        <input id="sound" type="checkbox" checked />
+        <button id="flashCut" type="button"></button>
+        <button id="flashFlicker" type="button"></button>
+        <dialog id="howModal"></dialog>
+        <dialog id="settingsModal"></dialog>
+        <button id="howClose" type="button"></button>
+        <button id="howOk" type="button"></button>
+        <button id="settingsClose" type="button"></button>
+        <button id="settingsCancel" type="button"></button>
+        <button id="settingsSave" type="button"></button>
+      </div>
+    </section>
+  </main>
+
+  
+  <script src="app.js"></script>
+</body>
+</html>
